@@ -60,7 +60,7 @@ jobs:
         if: steps.filter.outputs.mobile == 'true'
         uses: actions/setup-java@1
         with:
-          java-version: '11'
+          java-version: 8
       
       - name: Testing with Gradle
         if: steps.filter.outputs.mobile == 'true'
