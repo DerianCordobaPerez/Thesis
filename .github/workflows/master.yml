@@ -58,9 +58,9 @@ jobs:
 
       - name: Setup Java
         if: steps.filter.outputs.mobile == 'true'
-        uses: actions/setup-java@1
+        uses: actions/setup-java@v1
         with:
-          java-version: 8
+          java-version: '11'
       
       - name: Testing with Gradle
         if: steps.filter.outputs.mobile == 'true'
