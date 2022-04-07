@@ -1,0 +1,67 @@
+name: CI/CD
+
+on:
+  push:
+    branches:
+      - Master
+  pull_request:
+    branches:
+      - Master
+
+jobs: 
+  testing_web:
+    name: Testing web
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: web
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - uses: dorny/paths-filter@v2
+        id: filter
+        with:
+          filters: |
+            web:
+              - 'web/**'
+
+      - name: Setup node action
+        if: steps.filter.outputs.web == 'true'
+        uses: actions/setup-node@v2
+        with: 
+          node-version: '16.x'
+          
+      - name: Run tests for our web project.
+        if: steps.filter.outputs.web == 'true'
+        run: |
+          npm ci
+          npm install
+          npm run test
+  
+  testing_mobile:
+    name:  Testing mobile
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: mobile
+        
+    steps:
+      - uses: actions/checkout@v2
+
+      - uses: dorny/paths-filter@v2
+        id: filter
+        with:
+          filters: |
+            mobile:
+              - 'mobile/**'
+
+      - name: Setup Java
+        if: steps.filter.outputs.mobile == 'true'
+        uses: actions/setup-java@v1
+        with:
+          java-version: '11'
+      
+      - name: Testing with Gradle
+        if: steps.filter.outputs.mobile == 'true'
+        run: ./gradlew check
