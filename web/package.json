@@ -7,6 +7,10 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
+    "test": "jest",
+    "test:coverage": "jest --coverage",
+    "test:watch": "jest --watch",
+    "test:watch:coverage": "jest --watch --coverage",
     "dev:up": "docker-compose -f docker-compose.yml -f docker-compose.dev.yml up",
     "dev:up-build": "docker-compose -f docker-compose.yml -f docker-compose.dev.yml up --build",
     "prod:up": "docker-compose -f docker-compose.yml -f docker-compose.prod.yml up"
@@ -17,12 +21,15 @@
     "react-dom": "18.0.0"
   },
   "devDependencies": {
+    "@testing-library/jest-dom": "^5.16.4",
+    "@testing-library/react": "^13.0.0",
     "eslint": "^7.32.0",
     "eslint-config-next": "12.1.4",
     "eslint-config-standard": "^16.0.3",
     "eslint-plugin-import": "^2.26.0",
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-promise": "^5.2.0",
-    "eslint-plugin-react": "^7.29.4"
+    "eslint-plugin-react": "^7.29.4",
+    "jest": "^27.5.1"
   }
 }
