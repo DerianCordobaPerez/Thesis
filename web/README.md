@@ -1,34 +1,64 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+## Web project documentation
 
-## Getting Started
+- <div align="justify">
+    Web project developed using <b>NextJS, ES2022 and Firebase</b> technology, this will provide us with an api, the server is deployed using <a href="https://www.heroku.com">Heroku</a> and the database is hosted using <a href="https://console.firebase.google.com/">Firebase</a>.    
+  </div>
 
-First, run the development server:
+  <br>
 
-```bash
-npm run dev
-# or
-yarn dev
+- <div align="justify">
+    Within the scripts written within the project, it has some that are quite useful when it comes to executing the entire project, whether it is building and caching a Docker container or rebuilding said container from scratch until starting a container directly for production deployment, these scripts would be seen inside the <b>package.json</b> file.
+  </div>
+
+```json
+"dev:up": "docker-compose -f docker-compose.yml -f docker-compose.dev.yml up",
+"dev:up-build": "docker-compose -f docker-compose.yml -f docker-compose.dev.yml up --build",
+"prod:up": "docker-compose -f docker-compose.yml -f docker-compose.prod.yml up"
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Environment variables
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+- <div align="justify">
+    Within this project we must create a <b>.env</b> file where different environment variables will be used that will serve us both for the port where said server will be executed or the credentials of our database.
+  </div>
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+```bash
+PORT=YOUR_PORT # Port where the server will be executed, exmaple: PORT=3000
+FIREBASE_API_KEY: "...",
+FIREBASE_AUTH_DOMAIN: "...",
+FIREBASE_PROJECT_ID: "...",
+FIREBASE_STORAGE_BUCKET: "...",
+FIREBASE_MESSAGING_SENDER_ID: "..."
+FIREBASE_APP_ID: "..."
+FIREBASE_MEASUREMENT_ID: "..."
+```
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+## Installation for development with docker-compose (Recommended)
 
-## Learn More
+```bash
+git clone git@github.com:DerianCordobaPerez/Thesis.git
+cd Thesis/web
 
-To learn more about Next.js, take a look at the following resources:
+# Start Docker container, in case it is the first time to build it
+npm run dev:up
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+# Start Docker container but build the image at the same time
+npm run dev:up-build
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+# Start Docker container with the intention of deploying it in production mode
+npm run prod:up
+```
 
-## Deploy on Vercel
+## Installation (Manually)
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+```bash
+git clone git@github.com:DerianCordobaPerez/Thesis.git
+cd Thesis/web
+npm install
+npm run build
+npm start
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+<div align="justify">
+  Now you can visit: <a href="http://localhost:3000" target="_blank">http://localhost:3000</a>
+</div>
