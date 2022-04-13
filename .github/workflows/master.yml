@@ -3,12 +3,12 @@ name: CI/CD
 on:
   push:
     branches:
-      - Master
+      - main
   pull_request:
     branches:
-      - Master
+      - main
 
-jobs: 
+jobs:
   testing_web:
     name: Testing web
     runs-on: ubuntu-latest
@@ -29,23 +29,23 @@ jobs:
       - name: Setup node action
         if: steps.filter.outputs.web == 'true'
         uses: actions/setup-node@v2
-        with: 
-          node-version: '16.x'
-          
+        with:
+          node-version: "16.x"
+
       - name: Run tests for our web project.
         if: steps.filter.outputs.web == 'true'
         run: |
           npm ci
           npm install
           npm run test
-  
+
   testing_mobile:
-    name:  Testing mobile
+    name: Testing mobile
     runs-on: ubuntu-latest
     defaults:
       run:
         working-directory: mobile
-        
+
     steps:
       - uses: actions/checkout@v2
 
@@ -60,8 +60,8 @@ jobs:
         if: steps.filter.outputs.mobile == 'true'
         uses: actions/setup-java@v1
         with:
-          java-version: '11'
-      
+          java-version: "11"
+
       - name: Testing with Gradle
         if: steps.filter.outputs.mobile == 'true'
         run: ./gradlew check
