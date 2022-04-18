@@ -5,7 +5,7 @@ RUN mkdir -p /usr/src/app
 WORKDIR /usr/src/app
 
 # Installing dependencies
-COPY package*.json yarn.lock ./
+COPY package*.json ./
 RUN npm install
 
 # Copying source files
