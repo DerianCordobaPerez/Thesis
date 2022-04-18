@@ -7,6 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
+    "lint:fix": "next lint --fix",
+    "prepare": "cd ../ && husky install ./web/.husky",
     "test": "jest",
     "test:coverage": "jest --coverage",
     "test:watch": "jest --watch",
@@ -31,6 +33,13 @@
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-promise": "^5.2.0",
     "eslint-plugin-react": "^7.29.4",
-    "jest": "^27.5.1"
+    "husky": "^7.0.4",
+    "jest": "^27.5.1",
+    "lint-staged": "^12.3.8"
+  },
+  "lint-staged":{
+    "**/*.{js,jsx,ts,tsx}":[
+      "npx eslint --fix"
+    ]
   }
 }
