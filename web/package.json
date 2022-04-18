@@ -14,7 +14,7 @@
     "test:watch": "jest --watch",
     "test:watch:coverage": "jest --watch --coverage",
     "dev:up": "docker-compose -f docker-compose.yml -f docker-compose.dev.yml up",
-    "dev:up-build": "docker-compose -f docker-compose.yml -f docker-compose.dev.yml up --build",
+    "dev:up:build": "npm run dev:up -- --build",
     "prod:up": "docker-compose -f docker-compose.yml -f docker-compose.prod.yml up"
   },
   "dependencies": {
