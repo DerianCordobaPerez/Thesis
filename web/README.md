@@ -12,7 +12,7 @@
 
 ```json
 "dev:up": "docker-compose -f docker-compose.yml -f docker-compose.dev.yml up",
-"dev:up-build": "docker-compose -f docker-compose.yml -f docker-compose.dev.yml up --build",
+"dev:up:build": "npm run dev:up -- --build",
 "prod:up": "docker-compose -f docker-compose.yml -f docker-compose.prod.yml up"
 ```
 
@@ -43,7 +43,7 @@ cd Thesis/web
 npm run dev:up
 
 # Start Docker container but build the image at the same time
-npm run dev:up-build
+npm run dev:up:build
 
 # Start Docker container with the intention of deploying it in production mode
 npm run prod:up
