@@ -1,3 +1,24 @@
 #!/bin/sh
 . "$(dirname "$0")/_/husky.sh"
-cd ./web && npx lint-staged 
+cd ./web
+
+if [ ! -f ".env.example" ]; then
+    echo "No .env file found. Please create one."
+    exit 1
+fi
+
+ENV_DEVELOPMENT_LINE_LENGTH=$(wc -l < .env.development.local)
+ENV_PRODUCTION_LINE_LENGTH=$(wc -l < .env.production.local)
+ENV_EXAMPLE_LINE_LENGTH=$(wc -l < .env.example)
+
+if [ "$ENV_DEVELOPMENT_LINE_LENGTH" -ne "$ENV_EXAMPLE_LINE_LENGTH" ]; then
+    echo "Please make sure your .env.development file is up to date."
+    exit 1
+fi
+
+if [ "$ENV_PRODUCTION_LINE_LENGTH" -ne "$ENV_EXAMPLE_LINE_LENGTH" ]; then
+    echo "Please make sure your .env.production file is up to date."
+    exit 1
+fi
+
+npx lint-staged 
