@@ -36,6 +36,7 @@
     "prod:up": "docker-compose -f docker-compose.yml -f docker-compose.prod.yml up"
   },
   "dependencies": {
+    "firebase": "^9.8.2",
     "next": "12.1.4",
     "react": "18.0.0",
     "react-dom": "18.0.0",
@@ -55,8 +56,8 @@
     "jest": "^27.5.1",
     "lint-staged": "^12.3.8"
   },
-  "lint-staged":{
-    "**/*.{js,jsx,ts,tsx}":[
+  "lint-staged": {
+    "**/*.{js,jsx,ts,tsx}": [
       "npx eslint --fix"
     ]
   }
