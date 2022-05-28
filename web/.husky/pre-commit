@@ -2,13 +2,13 @@
 . "$(dirname "$0")/_/husky.sh"
 cd ./web
 
-if [ ! -f ".env" ]; then
+if [ ! -f ".env.example" ]; then
     echo "No .env file found. Please create one."
     exit 1
 fi
 
-ENV_DEVELOPMENT_LINE_LENGTH=$(wc -l < .env.development)
-ENV_PRODUCTION_LINE_LENGTH=$(wc -l < .env.production)
+ENV_DEVELOPMENT_LINE_LENGTH=$(wc -l < .env.development.local)
+ENV_PRODUCTION_LINE_LENGTH=$(wc -l < .env.production.local)
 ENV_EXAMPLE_LINE_LENGTH=$(wc -l < .env.example)
 
 if [ "$ENV_DEVELOPMENT_LINE_LENGTH" -ne "$ENV_EXAMPLE_LINE_LENGTH" ]; then
