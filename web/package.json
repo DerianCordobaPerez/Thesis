@@ -33,9 +33,11 @@
     "test:watch:coverage": "jest --watch --coverage",
     "dev:up": "docker-compose -f docker-compose.yml -f docker-compose.dev.yml up",
     "dev:up:build": "npm run dev:up -- --build",
-    "prod:up": "docker-compose -f docker-compose.yml -f docker-compose.prod.yml up"
+    "prod:up": "docker-compose -f docker-compose.yml -f docker-compose.prod.yml up",
+    "dev:migrate:postgres": "dotenv -e .env.development.local -- npx prisma migrate dev --name postgres-init"
   },
   "dependencies": {
+    "@prisma/client": "^3.14.0",
     "firebase": "^9.8.2",
     "next": "12.1.4",
     "react": "18.0.0",
@@ -54,7 +56,8 @@
     "eslint-plugin-react": "^7.29.4",
     "husky": "^7.0.4",
     "jest": "^27.5.1",
-    "lint-staged": "^12.3.8"
+    "lint-staged": "^12.3.8",
+    "prisma": "^3.14.0"
   },
   "lint-staged": {
     "**/*.{js,jsx,ts,tsx}": [
