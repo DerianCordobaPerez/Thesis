@@ -1,0 +1,36 @@
+import { NODE_ENV } from 'process'
+
+export const FIREBASE_API_KEY =
+  NODE_ENV !== 'production'
+    ? process.env.NEXT_PUBLIC_DEVELOPMENT_ENV_FIREBASE_API_KEY
+    : process.env.PRODUCTION_ENV_FIREBASE_API_KEY
+
+export const FIREBASE_AUTH_DOMAIN =
+    NODE_ENV !== 'production'
+      ? process.env.NEXT_PUBLIC_DEVELOPMENT_ENV_FIREBASE_AUTH_DOMAIN
+      : process.env.PRODUCTION_ENV_FIREBASE_AUTH_DOMAIN
+
+export const FIREBASE_PROJECT_ID =
+    NODE_ENV !== 'production'
+      ? process.env.NEXT_PUBLIC_DEVELOPMENT_ENV_FIREBASE_PROJECT_ID
+      : process.env.PRODUCTION_ENV_FIREBASE_PROJECT_ID
+
+export const FIREBASE_STORAGE_BUCKET =
+    NODE_ENV !== 'production'
+      ? process.env.NEXT_PUBLIC_DEVELOPMENT_ENV_FIREBASE_STORAGE_BUCKET
+      : process.env.PRODUCTION_ENV_FIREBASE_STORAGE_BUCKET
+
+export const FIREBASE_MESSAGING_SENDER_ID =
+    NODE_ENV !== 'production'
+      ? process.env.NEXT_PUBLIC_DEVELOPMENT_ENV_FIREBASE_MESSAGING_SENDER_ID
+      : process.env.PRODUCTION_ENV_FIREBASE_MESSAGING_SENDER_ID
+
+export const FIREBASE_APP_ID =
+    NODE_ENV !== 'production'
+      ? process.env.NEXT_PUBLIC_DEVELOPMENT_ENV_FIREBASE_APP_ID
+      : process.env.PRODUCTION_ENV_FIREBASE_APP_ID
+
+export const FIREBASE_MEASUREMENT_ID =
+    NODE_ENV !== 'production'
+      ? process.env.NEXT_PUBLIC_DEVELOPMENT_ENV_FIREBASE_MEASUREMENT_ID
+      : process.env.PRODUCTION_ENV_FIREBASE_MEASUREMENT_ID
