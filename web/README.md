@@ -1,7 +1,7 @@
 ## Web project documentation
 
 - <div align="justify">
-    Web project developed using <b>NextJS, ES2022 and Firebase</b> technology, this will provide us with an api, the server is deployed using <a href="https://www.heroku.com">Heroku</a> and the database is hosted using <a href="https://console.firebase.google.com/">Firebase</a>.    
+    Web project developed using <b>NextJS, ES2022, Prisma ORM and SQL Postgres</b> technology, this will provide us with an api, the server is deployed using <a href="https://www.heroku.com">Heroku</a> and the database will be Postgres using <a href="https://www.prisma.io/docs/getting-started/quickstart">Prisma as ORM</a>.    
   </div>
 
   <br>
@@ -22,16 +22,29 @@
     Within this project we must create a <b>.env</b> file where different environment variables will be used that will serve us both for the port where said server will be executed or the credentials of our database.
   </div>
 
+- <div align="justify">
+    Within any NextJS project it is recommended to work through local .env files, two of the files necessary for this project are .env.development.local and .env.production.local, within the .env.development file we must put each variable name the prefix NEXT_DEVELOPMENT_ENV_ in the same way for the file .env.production we will put NEXT_PRODUCTION_ENV before.
+  </div>
+
 ```bash
-PORT=YOUR_PORT # Port where the server will be executed, exmaple: PORT=3000
-FIREBASE_API_KEY: "...",
-FIREBASE_AUTH_DOMAIN: "...",
-FIREBASE_PROJECT_ID: "...",
-FIREBASE_STORAGE_BUCKET: "...",
-FIREBASE_MESSAGING_SENDER_ID: "..."
-FIREBASE_APP_ID: "..."
-FIREBASE_MEASUREMENT_ID: "..."
+DATABASE_URL="driver://your_user:your_password@your_host:your_port/your_database_name"
+
+NEXT_DEVELOPMENT_ENV_DATABASE_URL="driver://your_user:your_password@your_host:your_port/your_database_name"
 ```
+
+## Database management and use of the ORM Prisma
+
+- <div align="justify">
+    We will have <a href="https://www.prisma.io/docs/getting-started/quickstart">Prisma</a> as the direct ORM of the project, with which we will be able to handle declarative and very flexible schemes in case of changing the connection driver (In our case we will use Postgres as connection driver), we have created a custom script to execute the prism migrations using the .env.development.local file instead of the .env directly, the command in question is the following.
+  </div>
+
+```json
+"dev:migrate:postgres": "dotenv -e .env.development.local -- npx prisma migrate dev --name postgres-init"
+```
+
+- <div align="justify">
+    The result of this command can be seen in the prisma directory followed by migrations located at the root of our project.
+  </div>
 
 ## Installation for development with docker-compose (Recommended)
 
