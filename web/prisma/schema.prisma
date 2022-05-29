@@ -7,10 +7,32 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+model Person {
+  id        String   @id @default(uuid())
+  name      String
+  surnmae   String
+  password  String
+  address   Address  @relation(fields: [addressId], references: [id])
+  addressId String
+  phone     Phone    @relation(fields: [phoneId], references: [id])
+  phoneId   String
+  avatar    String
+  birthDate DateTime
+}
+
+model Address {
+  id      String   @id @default(uuid())
+  Person  Person[]
+  city    String
+  country String
+  zipCode String   @default("21000")
+}
+
 model Phone {
   id     String     @id @default(uuid())
   number String
   brand  PhoneBrand
+  Person Person[]
 }
 
 enum PhoneBrand {
