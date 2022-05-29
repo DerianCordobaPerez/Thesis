@@ -15,9 +15,11 @@ model Person {
   address   Address  @relation(fields: [addressId], references: [id])
   addressId String
   phone     Phone    @relation(fields: [phoneId], references: [id])
-  phoneId   String
+  phoneId   String   @unique
   avatar    String
   birthDate DateTime
+  doctor    Doctor?
+  Patient   Patient?
 }
 
 model Address {
@@ -32,7 +34,7 @@ model Phone {
   id     String     @id @default(uuid())
   number String
   brand  PhoneBrand
-  Person Person[]
+  Person Person?
 }
 
 enum PhoneBrand {
@@ -40,4 +42,50 @@ enum PhoneBrand {
   CLARO
   MOVISTAR
   OTHER
+}
+
+model Doctor {
+  id                String      @id @default(uuid())
+  person            Person      @relation(fields: [personId], references: [id])
+  personId          String      @unique
+  specialities      String[]
+  patients          Patient[]   @relation(references: [id])
+  diagnosedDiseases Condition[] @relation("DiagnosedDiseases")
+  diseasesTreated   Condition[] @relation("DiseasesTreated")
+}
+
+model Patient {
+  id       String   @id @default(uuid())
+  person   Person   @relation(fields: [personId], references: [id])
+  personId String   @unique
+  doctors  Doctor[] @relation(references: [id])
+}
+
+model Disease {
+  id         String      @id @default(uuid())
+  name       String
+  symptoms   Symptom[]   @relation(references: [id])
+  allergies  String[]
+  conditions Condition[] @relation(references: [id])
+}
+
+model Symptom {
+  id         String    @id @default(uuid())
+  name       String
+  qualities  String[]
+  ocurrences String[]
+  severity   String
+  diseases   Disease[] @relation(references: [id])
+}
+
+model Condition {
+  id          String    @id @default(uuid())
+  startTime   DateTime
+  endTime     DateTime
+  description String
+  diagnoseBy  Doctor?   @relation("DiagnosedDiseases", fields: [doctorId], references: [id])
+  doctorId    String?
+  teatredBy   Doctor?   @relation("DiseasesTreated", fields: [teatredById], references: [id])
+  teatredById String?
+  diseases    Disease[] @relation(references: [id])
 }
