@@ -8,16 +8,18 @@ datasource db {
 }
 
 model Person {
-  id        String   @id @default(uuid())
+  id        String    @id @default(uuid())
   name      String
-  surnmae   String
+  surname   String
+  age       Int
+  email     String    @unique
   password  String
-  address   Address  @relation(fields: [addressId], references: [id])
-  addressId String
-  phone     Phone    @relation(fields: [phoneId], references: [id])
-  phoneId   String   @unique
+  address   Address?  @relation(fields: [addressId], references: [id])
+  addressId String?
+  phone     Phone?    @relation(fields: [phoneId], references: [id])
+  phoneId   String?   @unique
   avatar    String
-  birthDate DateTime
+  birthDate DateTime?
   doctor    Doctor?
   Patient   Patient?
 }
@@ -32,7 +34,7 @@ model Address {
 
 model Phone {
   id     String     @id @default(uuid())
-  number String
+  number String     @unique
   brand  PhoneBrand
   Person Person?
 }
@@ -46,8 +48,8 @@ enum PhoneBrand {
 
 model Doctor {
   id                String      @id @default(uuid())
-  person            Person      @relation(fields: [personId], references: [id])
-  personId          String      @unique
+  person            Person?     @relation(fields: [personId], references: [id])
+  personId          String?     @unique
   specialities      String[]
   patients          Patient[]   @relation(references: [id])
   diagnosedDiseases Condition[] @relation("DiagnosedDiseases")
