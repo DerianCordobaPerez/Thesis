@@ -27,7 +27,7 @@
     "lint": "next lint",
     "lint:fix": "next lint --fix",
     "prepare": "cd ../ && husky install ./web/.husky",
-    "test": "jest",
+    "test": "jest --verbose",
     "test:coverage": "jest --coverage",
     "test:watch": "jest --watch",
     "test:watch:coverage": "jest --watch --coverage",
