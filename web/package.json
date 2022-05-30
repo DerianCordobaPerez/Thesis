@@ -31,6 +31,10 @@
     "test:coverage": "jest --coverage",
     "test:watch": "jest --watch",
     "test:watch:coverage": "jest --watch --coverage",
+    "test:api": "npm run test:docker:up && dotenv -e .env.test -- npx prisma migrate deploy && jest -i",
+    "test:api:coverage": "npm run test:api -- --coverage",
+    "test:api:watch": "npm run test:api -- --watch",
+    "test:api:watch:coverage": "npm run test:api -- --watch --coverage",
     "dev:docker:up": "docker-compose -f docker-compose.yml -f docker-compose.dev.yml up",
     "dev:docker:up:build": "npm run dev:up -- --build",
     "prod:docker:up": "docker-compose -f docker-compose.yml -f docker-compose.prod.yml up",
@@ -59,6 +63,7 @@
     "husky": "^7.0.4",
     "jest": "^27.5.1",
     "lint-staged": "^12.3.8",
+    "node-mocks-http": "^1.11.0",
     "prisma": "^3.14.0"
   },
   "lint-staged": {
