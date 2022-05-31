@@ -56,7 +56,7 @@ describe('Phones', () => {
 
       await handle(req, res)
 
-      expect(res._getJSONData().data.length).toBeGreaterThan(1)
+      expect(res._getJSONData().data.length).toBeGreaterThan(0)
     })
 
     it('should respond with error', async () => {
