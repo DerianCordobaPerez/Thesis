@@ -12,6 +12,21 @@ jobs:
   testing_web:
     name: Testing web
     runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres
+        env:
+          POSTGRES_USER: prisma
+          POSTGRES_PASSWORD: prisma
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+        ports:
+          - 5432:5432
+    env:
+      DATABASE_URL: postgresql://prisma:prisma@localhost:5432/tests
     defaults:
       run:
         working-directory: web
@@ -31,6 +46,10 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version: "16.x"
+
+      - name: Migrate tables in database
+        if: steps.filter.outputs.web == 'true'
+        run: npx prisma migrate deploy
 
       - name: Run tests for our web project.
         if: steps.filter.outputs.web == 'true'
