@@ -1,4 +1,4 @@
-import { PhoneRepositoryMock } from 'tests/Contexts/Mooc/Phones/__moocks__/PhoneRepositoryMock'
+import { PhoneRepositoryMock } from 'tests/Contexts/Mock/__mocks__/PhoneRepositoryMock'
 
 let mockRepository = null
 
