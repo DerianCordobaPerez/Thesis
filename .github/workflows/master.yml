@@ -47,16 +47,19 @@ jobs:
         with:
           node-version: "16.x"
 
-      - name: Migrate tables in database
-        if: steps.filter.outputs.web == 'true'
-        run: npx prisma migrate deploy
-
-      - name: Run tests for our web project.
+      - name: Install dependencies
         if: steps.filter.outputs.web == 'true'
         run: |
           npm ci
           npm install
-          npm run test
+
+      - name: Migrate tables in database
+        if: steps.filter.outputs.web == 'true'
+        run: npx prisma migrate deploy
+
+      - name: Run tests of the web project.
+        if: steps.filter.outputs.web == 'true'
+        run: npm run test
 
   testing_mobile:
     name: Testing mobile
