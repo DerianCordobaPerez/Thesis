@@ -11,9 +11,10 @@
   </div>
 
 ```json
-"dev:up": "docker-compose -f docker-compose.yml -f docker-compose.dev.yml up",
-"dev:up:build": "npm run dev:up -- --build",
-"prod:up": "docker-compose -f docker-compose.yml -f docker-compose.prod.yml up"
+"dev:docker:up": "docker-compose -f docker-compose.yml -f docker-compose.dev.yml up",
+"dev:docker:up:build": "npm run dev:up -- --build",
+"prod:docker:up": "docker-compose -f docker-compose.yml -f docker-compose.prod.yml up",
+"test:docker:up": "docker-compose -f docker-compose.test.yml up -d"
 ```
 
 ## Environment variables
@@ -53,13 +54,16 @@ git clone git@github.com:DerianCordobaPerez/Thesis.git
 cd Thesis/web
 
 # Start Docker container, in case it is the first time to build it
-npm run dev:up
+npm run dev:docker:up
 
 # Start Docker container but build the image at the same time
-npm run dev:up:build
+npm run dev:docker:up:build
 
 # Start Docker container with the intention of deploying it in production mode
-npm run prod:up
+npm run prod:docker:up
+
+# Start the Postgres Docker container with the intention of running the tests
+npm run test:docker:up
 ```
 
 ## Installation (Manually)
