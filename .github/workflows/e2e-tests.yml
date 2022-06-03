@@ -1,0 +1,33 @@
+name: e2e tests
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  e2e-test:
+    name: Cypress run
+    runs-on: ubuntu-20.04
+    strategy:
+      fail-fast: false
+      matrix:
+        containers: [1, 2]
+    defaults:
+      run:
+        working-directory: web
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Cypress run
+        uses: cypress-io/github-action@v4
+        with:
+          browser: chrome
+          record: true
+          parallel: true
+          group: "Actions 2e2 tests"
+        env:
+          CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
