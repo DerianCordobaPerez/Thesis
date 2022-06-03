@@ -22,10 +22,14 @@ jobs:
         uses: cypress-io/github-action@v4
         with:
           working-directory: web
+          build: npm run build
+          start: npm run start
+          wait-on: http://localhost:3000
+          wait-on-timeout: 120
           browser: chrome
           record: true
           parallel: true
-          group: "Actions 2e2 tests"
+          group: "Chrome 2e2 tests"
         env:
           CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
