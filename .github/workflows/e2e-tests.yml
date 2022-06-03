@@ -13,9 +13,6 @@ jobs:
       fail-fast: false
       matrix:
         containers: [1, 2]
-    defaults:
-      run:
-        working-directory: web
 
     steps:
       - name: Checkout
@@ -24,6 +21,7 @@ jobs:
       - name: Cypress run
         uses: cypress-io/github-action@v4
         with:
+          working-directory: web
           browser: chrome
           record: true
           parallel: true
