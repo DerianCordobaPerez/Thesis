@@ -2,11 +2,7 @@
   "name": "web",
   "version": "0.1.0",
   "private": true,
-  "authors": [
-    "Derian Córdoba",
-    "Francisco García",
-    "Jackson Montenegro"
-  ],
+  "author": "Derian Córdoba",
   "homepage": "https://github.com/DerianCordobaPerez/Thesis/blob/main/README.md",
   "repository": {
     "type": "git",
