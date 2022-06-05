@@ -1,4 +1,4 @@
-name: CI/CD
+name: CI
 
 on:
   push:
@@ -9,9 +9,9 @@ on:
       - main
 
 jobs:
-  testing_web:
-    name: Testing web
-    runs-on: ubuntu-latest
+  unit-tests:
+    name: Unit tests
+    runs-on: ubuntu-20.04
     services:
       postgres:
         image: postgres
@@ -60,6 +60,42 @@ jobs:
       - name: Run tests of the web project.
         if: steps.filter.outputs.web == 'true'
         run: npm run test
+
+  e2e-tests:
+    name: Cypress run
+    runs-on: ubuntu-20.04
+    strategy:
+      fail-fast: false
+      matrix:
+        containers: [1, 2, 3]
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - uses: dorny/paths-filter@v2
+        id: filter
+        with:
+          filters: |
+            web:
+              - 'web/**'
+
+      - name: Cypress run
+        if: steps.filter.outputs.web == 'true' && github.event_name == 'push'
+        uses: cypress-io/github-action@v4
+        with:
+          working-directory: web
+          build: npm run build
+          start: npm run start
+          wait-on: http://localhost:3000
+          wait-on-timeout: 120
+          browser: chrome
+          record: true
+          parallel: true
+          group: "Chrome 2e2 tests"
+        env:
+          CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
   testing_mobile:
     name: Testing mobile
