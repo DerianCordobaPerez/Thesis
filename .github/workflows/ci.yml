@@ -114,12 +114,18 @@ jobs:
             mobile:
               - 'mobile/**'
 
-      - name: Setup Java
+      - name: Setup node action
         if: steps.filter.outputs.mobile == 'true'
-        uses: actions/setup-java@v1
+        uses: actions/setup-node@v2
         with:
-          java-version: "11"
+          node-version: "16.x"
 
-      - name: Testing with Gradle
+      - name: Install dependencies
         if: steps.filter.outputs.mobile == 'true'
-        run: ./gradlew check
+        run: |
+          npm ci
+          npm install
+
+      - name: Run tests of the mobile project.
+        if: steps.filter.outputs.mobile == 'true'
+        run: npm run test
