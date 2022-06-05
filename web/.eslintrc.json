@@ -3,7 +3,8 @@
     "browser": true,
     "es2021": true,
     "node": true,
-    "cypress/globals": true
+    "cypress/globals": true,
+    "jest/globals": true
   },
   "extends": [
     "plugin:react/recommended",
@@ -17,7 +18,7 @@
     "ecmaVersion": "latest",
     "sourceType": "module"
   },
-  "plugins": ["react", "cypress"],
+  "plugins": ["react", "cypress", "jest"],
   "rules": {
     "react/react-in-jsx-scope": "off",
     "react/prop-types": "off",
