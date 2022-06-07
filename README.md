@@ -26,5 +26,5 @@
 - Mobile Project
 
   - <div align="justify">
-      The mobile project is developed in the <b>Kotlin</b> programming language, designed and written entirely under the <b>Android Studio</b> environment. Within the mobile application there is the same graphical interface which is found within the web project by the client. Within the README.md of the mobile project, all the procedures and use of the same are specified in a more technical way.
+      The mobile project is developed in the <b>JavaScript</b> programming language. Within the mobile application there is the same graphical interface that is found within the web project by the client. Within the README.md of the mobile project, all the procedures and use of it are specified in a more technical way.
     </div>
