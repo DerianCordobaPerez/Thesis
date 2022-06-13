@@ -64,7 +64,7 @@
     "eslint-plugin-promise": "^6.0.0",
     "eslint-plugin-react": "^7.29.4",
     "husky": "^8.0.1",
-    "jest": "^27.5.1",
+    "jest": "^28.1.1",
     "jest-mock-extended": "^2.0.4",
     "lint-staged": "^12.3.8",
     "node-mocks-http": "^1.11.0",
