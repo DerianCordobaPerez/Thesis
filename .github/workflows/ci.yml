@@ -84,7 +84,6 @@ jobs:
         if: steps.filter.outputs.web == 'true' && github.event_name == 'push'
         uses: cypress-io/github-action@v4
         with:
-          install: false
           working-directory: web
           build: npm run build
           start: npm run start
