@@ -43,9 +43,12 @@
     "dev:migrate:postgres": "dotenv -e .env.development.local -- npx prisma migrate dev --name postgres-init"
   },
   "dependencies": {
+    "@next-auth/prisma-adapter": "^1.0.3",
     "@prisma/client": "^3.14.0",
+    "crypto-js": "^4.1.1",
     "firebase": "^9.8.2",
     "next": "12.1.6",
+    "next-auth": "latest",
     "react": "18.0.0",
     "react-dom": "18.0.0",
     "sass": "^1.50.0"
