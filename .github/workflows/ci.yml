@@ -50,8 +50,8 @@ jobs:
       - name: Install dependencies
         if: steps.filter.outputs.web == 'true'
         run: |
-          npm ci
-          npm install
+          npm ci --force
+          npm install --force
 
       - name: Migrate tables in database
         if: steps.filter.outputs.web == 'true'
@@ -84,6 +84,7 @@ jobs:
         if: steps.filter.outputs.web == 'true' && github.event_name == 'push'
         uses: cypress-io/github-action@v4
         with:
+          install: false
           working-directory: web
           build: npm run build
           start: npm run start
