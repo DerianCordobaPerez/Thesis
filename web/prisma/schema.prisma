@@ -7,8 +7,9 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Accounts {
+model Account {
   id                String  @id @default(cuid())
+  user              User    @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId            String
   type              String
   provider          String
@@ -21,30 +22,41 @@ model Accounts {
   id_token          String? @db.Text
   session_state     String?
 
-  user Users @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@unique([provider, providerAccountId])
 }
 
-model Sessions {
+model Session {
   id           String   @id @default(cuid())
   sessionToken String   @unique
   userId       String
   expires      DateTime
-  user         Users    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
-model Users {
-  id            String     @id @default(cuid())
-  name          String?
-  email         String?    @unique
+model User {
+  id            String    @id @default(uuid())
+  name          String
+  surname       String
+  age           Int
+  email         String
+  password      String
+  address       Address?  @relation(fields: [addressId], references: [id])
+  addressId     String?
+  phone         Phone?    @relation(fields: [phoneId], references: [id])
+  phoneId       String?   @unique
+  avatar        String
+  birthDate     DateTime?
+  doctor        Doctor?
+  patient       Patient?
   emailVerified DateTime?
-  image         String?
-  accounts      Accounts[]
-  sessions      Sessions[]
+  accounts      Account[]
+  sessions      Session[]
+
+  @@unique([email, phoneId])
 }
 
-model VerificationTokens {
+model VerificationToken {
   identifier String
   token      String   @unique
   expires    DateTime
@@ -52,36 +64,19 @@ model VerificationTokens {
   @@unique([identifier, token])
 }
 
-model Person {
-  id        String    @id @default(uuid())
-  name      String
-  surname   String
-  age       Int
-  email     String    @unique
-  password  String
-  address   Address?  @relation(fields: [addressId], references: [id])
-  addressId String?
-  phone     Phone?    @relation(fields: [phoneId], references: [id])
-  phoneId   String?   @unique
-  avatar    String
-  birthDate DateTime?
-  doctor    Doctor?
-  Patient   Patient?
-}
-
 model Address {
-  id      String   @id @default(uuid())
-  Person  Person[]
+  id      String @id @default(uuid())
   city    String
   country String
-  zipCode String   @default("21000")
+  zipCode String @default("21000")
+  Users   User[]
 }
 
 model Phone {
   id     String     @id @default(uuid())
   number String     @unique
   brand  PhoneBrand
-  Person Person?
+  user   User?
 }
 
 enum PhoneBrand {
@@ -93,8 +88,8 @@ enum PhoneBrand {
 
 model Doctor {
   id                String      @id @default(uuid())
-  person            Person?     @relation(fields: [personId], references: [id])
-  personId          String?     @unique
+  user              User        @relation(fields: [userId], references: [id])
+  userId            String      @unique
   specialities      String[]
   patients          Patient[]   @relation(references: [id])
   diagnosedDiseases Condition[] @relation("DiagnosedDiseases")
@@ -102,10 +97,10 @@ model Doctor {
 }
 
 model Patient {
-  id       String   @id @default(uuid())
-  person   Person   @relation(fields: [personId], references: [id])
-  personId String   @unique
-  doctors  Doctor[] @relation(references: [id])
+  id      String   @id @default(uuid())
+  user    User     @relation(fields: [userId], references: [id])
+  userId  String   @unique
+  doctors Doctor[] @relation(references: [id])
 }
 
 model Disease {
