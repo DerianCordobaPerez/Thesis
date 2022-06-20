@@ -25,7 +25,7 @@ export default NextAuth({
       },
       authorize: async (credentials, req) => {
         const user = await fetch(
-          `${process.env.API_URL}/users/check-credentials`,
+          `${process.env.NEXTAUTH_URL}/api/users/check-credentials`,
           {
             method: 'POST',
             headers: {
