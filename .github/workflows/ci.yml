@@ -50,7 +50,7 @@ jobs:
       - name: Install dependencies
         if: steps.filter.outputs.web == 'true'
         run: |
-          npm ci --force
+          npm ci
 
       - name: Migrate tables in database
         if: steps.filter.outputs.web == 'true'
@@ -124,7 +124,6 @@ jobs:
         if: steps.filter.outputs.mobile == 'true'
         run: |
           npm ci
-          npm install
 
       - name: Run tests of the mobile project.
         if: steps.filter.outputs.mobile == 'true'
