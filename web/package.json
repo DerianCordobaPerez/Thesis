@@ -51,7 +51,7 @@
     "next-auth": "latest",
     "react": "18.0.0",
     "react-dom": "18.0.0",
-    "sass": "^1.50.0"
+    "sass": "^1.52.3"
   },
   "devDependencies": {
     "@testing-library/jest-dom": "^5.16.4",
