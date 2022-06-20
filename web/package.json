@@ -41,13 +41,15 @@
     "prod:docker:up": "docker-compose -f docker-compose.yml -f docker-compose.prod.yml up",
     "test:docker:up": "docker-compose -f docker-compose.test.yml up -d",
     "docker:down": "docker-compose down --remove-orphans",
-    "dev:migrate:postgres": "dotenv -e .env.development.local -- npx prisma migrate dev --name postgres-init"
+    "dev:migrate:postgres": "dotenv -e .env.development.local -- npx prisma migrate dev --name postgres-init",
+    "dev:prisma:studio": "dotenv -e .env.development.local -- npx prisma studio"
   },
   "dependencies": {
     "@next-auth/prisma-adapter": "^1.0.3",
     "@prisma/client": "^3.14.0",
     "crypto-js": "^4.1.1",
     "firebase": "^9.8.2",
+    "lodash": "^4.17.21",
     "next": "12.1.6",
     "next-auth": "latest",
     "react": "18.0.0",
