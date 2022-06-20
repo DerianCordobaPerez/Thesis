@@ -8,8 +8,6 @@
     To be able to accept X doctor as a doctor with whom you have presented different appointments, all this done by the patient where the doctor could then verify if this information related to him is totally true.
   </div>
 
-<br>
-
 - <div align="justify">
     Being able to share different information by the patient directly with the doctor in question through different communication platforms, this in case the doctor is not registered as a doctor within the application, in case said doctor already has an account Within the application, he will be able to see said information within the patients whom he has verified that he is his doctor, on the other hand, the patient will also be able to share the information with the doctors who are <b>"personal doctors" </b> directly from the application being highlighted the information within the application either on the web or mobile platform.
   </div>
