@@ -57,9 +57,11 @@
     "sass": "^1.50.0"
   },
   "devDependencies": {
+    "@testing-library/cypress": "^8.0.3",
     "@testing-library/jest-dom": "^5.16.4",
     "@testing-library/react": "^13.3.0",
     "cypress": "^10.0.2",
+    "cypress-social-logins": "^1.14.0",
     "eslint": "latest",
     "eslint-config-next": "latest",
     "eslint-config-standard": "latest",
