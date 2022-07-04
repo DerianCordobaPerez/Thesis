@@ -1,10 +1,9 @@
 import Layout from 'components/layout'
 import Link from 'next/link'
-import { useSession, signOut, signIn } from 'next-auth/react'
+import { signOut, signIn } from 'next-auth/react'
+import { withSession } from 'hoc/withSession'
 
-export default function Home () {
-  const { data: session } = useSession()
-
+function Home ({ session }) {
   return (
     <Layout>
       <nav>
@@ -34,3 +33,5 @@ export default function Home () {
     </Layout>
   )
 }
+
+export default withSession(Home)
