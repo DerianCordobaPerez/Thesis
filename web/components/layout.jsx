@@ -1,21 +1,25 @@
 import Head from 'next/head'
-import Footer from './footer'
-import styles from 'styles/Home.module.scss'
+import Box from './box'
+import Navbar from './navbar'
 
 export default function Layout ({ children, title }) {
   title ??= 'Home'
 
   return (
-    <div className={styles.container}>
+    <Box
+      css={{
+        maxW: '100%'
+      }}
+    >
       <Head>
         <title>{title}</title>
         <meta name="description" content="Thesis" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main className={styles.main}>{children}</main>
+      <Navbar />
 
-      <Footer />
-    </div>
+      {children}
+    </Box>
   )
 }
