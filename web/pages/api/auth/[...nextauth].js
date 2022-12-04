@@ -4,10 +4,12 @@ import GoogleProvider from 'next-auth/providers/google'
 import CredentialsProvider from 'next-auth/providers/credentials'
 import { PrismaAdapter } from '@next-auth/prisma-adapter'
 import prisma from 'libs/prisma'
-import { NODE_ENV } from 'config/env'
+import { get } from 'utils/env'
 
 function isValidHttpUrl (url) {
-  if (NODE_ENV !== 'production') {
+  const isDevelopmentMode = get('NODE_ENV') !== 'production'
+
+  if (isDevelopmentMode) {
     return true
   }
 
@@ -27,7 +29,7 @@ export default async function handler (req, res) {
     callbackUrl &&
     !isValidHttpUrl(callbackUrl)
   ) {
-    return res.status(500).send('')
+    return res.status(500).send('Error internal server')
   }
 
   return await NextAuth(req, res, {
@@ -48,9 +50,11 @@ export default async function handler (req, res) {
             required: true
           }
         },
-        authorize: async (credentials, req) => {
-          const user = await fetch(
-            `${process.env.NEXTAUTH_URL}/api/users/check-credentials`,
+        authorize: async (credentials, _) => {
+          const nextAuthUrl = get('NEXTAUTH_URL')
+
+          const response = await fetch(
+            `${nextAuthUrl}/api/users/check-credentials`,
             {
               method: 'POST',
               headers: {
@@ -60,21 +64,23 @@ export default async function handler (req, res) {
               body: JSON.stringify(credentials)
             }
           )
-            .then((res) => res.json())
-            .catch(() => null)
 
-          return user || null
+          if (!response.ok) {
+            return null
+          }
+
+          return await response.json()
         }
       }),
 
       FacebookProvider({
-        clientId: process.env.FACEBOOK_CLIENT_ID,
-        clientSecret: process.env.FACEBOOK_CLIENT_SECRET
+        clientId: get('FACEBOOK_CLIENT_ID'),
+        clientSecret: get('FACEBOOK_CLIENT_SECRET')
       }),
 
       GoogleProvider({
-        clientId: process.env.GOOGLE_CLIENT_ID,
-        clientSecret: process.env.GOOGLE_CLIENT_SECRET
+        clientId: get('GOOGLE_CLIENT_ID'),
+        clientSecret: get('GOOGLE_CLIENT_SECRET')
       })
     ],
     // pages: {
@@ -82,6 +88,6 @@ export default async function handler (req, res) {
     // },
     adapter: PrismaAdapter(prisma),
     session: { strategy: 'jwt' },
-    secret: process.env.SECRET
+    secret: get('SECRET')
   })
 }
