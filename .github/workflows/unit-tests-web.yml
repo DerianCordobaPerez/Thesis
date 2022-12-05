@@ -3,8 +3,8 @@ name: Unit tests web
 on:
   pull-request:
     branches: [ main ]
-    paths:
-      - 'web/**/*'
+    # paths:
+    #   - 'web/**/*'
   workflow-dispatch:
   schedule:
     - cron: '* 20 * * *'
