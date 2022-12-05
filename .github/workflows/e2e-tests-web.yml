@@ -1,10 +1,10 @@
-name: Unit tests web
+name: E2E tests web
 
 on:
   pull_request:
     branches: [ main ]
-    # paths:
-    #   - 'web/**/*'
+    paths:
+      - 'web/**/*'
   workflow_dispatch:
   schedule:
     - cron: '* 20 * * *'
