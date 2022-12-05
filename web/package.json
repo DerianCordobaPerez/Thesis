@@ -72,7 +72,7 @@
     "eslint-plugin-react": "latest",
     "husky": "^8.0.1",
     "jest": "^27.5.1",
-    "jest-mock-extended": "^2.0.4",
+    "jest-mock-extended": "^3.0.1",
     "lint-staged": "^13.0.3",
     "node-mocks-http": "^1.11.0",
     "prisma": "^3.14.0",
