@@ -1,11 +1,11 @@
 name: Unit tests web
 
 on:
-  pull-request:
+  pull_request:
     branches: [ main ]
     # paths:
     #   - 'web/**/*'
-  workflow-dispatch:
+  workflow_dispatch:
   schedule:
     - cron: '* 20 * * *'
 
