@@ -70,7 +70,7 @@
     "eslint-plugin-node": "latest",
     "eslint-plugin-promise": "latest",
     "eslint-plugin-react": "latest",
-    "husky": "^8.0.1",
+    "husky": "^8.0.2",
     "jest": "^27.5.1",
     "jest-mock-extended": "^2.0.4",
     "lint-staged": "^13.0.3",
