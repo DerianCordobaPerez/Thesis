@@ -1,0 +1,53 @@
+name: Unit tests web
+
+on:
+  pull-request:
+    branches: [ main ]
+    paths:
+      - 'web/**/*'
+  workflow-dispatch:
+  schedule:
+    - cron: '* 20 * * *'
+
+jobs:
+  unit-tests:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [ '16.x', '17.x', '18.x' ]
+    services:
+      postgres:
+        image: postgres
+        env:
+          POSTGRES_USER: prisma
+          POSTGRES_PASSWORD: prisma
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+        ports:
+          - 5432:5432
+    env:
+      DATABASE_URL: postgresql://prisma:prisma@localhost:5432/tests
+    defaults:
+      run:
+        working-directory: web
+      
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Setup node action
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Migrate database tables
+        run: npx prisma migrate deploy
+
+      - name: Run tests
+        run: npm run test
+
