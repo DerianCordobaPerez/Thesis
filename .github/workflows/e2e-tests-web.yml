@@ -4,10 +4,10 @@ on:
   pull_request:
     branches: [ main ]
     paths:
-      - 'web/**/*'
+      - 'web/**/*.{js,jsx,ts,tsx}'
   workflow_dispatch:
   schedule:
-    - cron: '* 20 * * *'
+    - cron: '0 20 * * *'
 
 jobs:
   e2e-tests:
@@ -16,6 +16,8 @@ jobs:
       fail-fast: false
       matrix:
         containers: [1, 2, 3]
+    env:
+      DATABASE_URL: postgresql://prisma:prisma@localhost:5432/tests
 
     steps:
       - uses: actions/checkout@v3
@@ -35,7 +37,13 @@ jobs:
           group: "Chrome 2e2 tests"
         env:
           CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
+          FACEBOOK_CLIENT_ID: ${{ secrets.FACEBOOK_CLIENT_ID }}
+          FACEBOOK_CLIENT_SECRET: ${{ secrets.FACEBOOK_CLIENT_SECRET }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GOOGLE_CLIENT_ID: ${{ secrets.GOOGLE_CLIENT_ID }}
+          GOOGLE_CLIENT_SECRET: ${{ secrets.GOOGLE_CLIENT_SECRET }}
+          NEXTAUTH_URL: http://localhost:3000/
+          SESSION_SECRET: ${{ secrets.SESSION_SECRET }}
 
       - uses: actions/upload-artifact@v2
         if: failure()

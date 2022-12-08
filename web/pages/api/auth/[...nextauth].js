@@ -88,6 +88,6 @@ export default async function handler (req, res) {
     // },
     adapter: PrismaAdapter(prisma),
     session: { strategy: 'jwt' },
-    secret: get('SECRET')
+    secret: get('SESSION_SECRET')
   })
 }
