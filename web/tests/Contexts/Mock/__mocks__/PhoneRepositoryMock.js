@@ -7,7 +7,7 @@ export class PhoneRepositoryMock {
   #defaultNumber = '123456789'
   #defaultEditNumber = '987654321'
 
-  async assertRespondWithErrorForGetPhones() {
+  async assertRespondWithErrorForGetPhones () {
     const { req, res } = createMocks({
       method: 'PUT'
     })
@@ -17,7 +17,7 @@ export class PhoneRepositoryMock {
     expect(res._getStatusCode()).toBe(400)
   }
 
-  async assertCreatePhone() {
+  async assertCreatePhone () {
     const mockPhone = {
       number: this.#defaultNumber,
       brand: this.#mockBrands[Math.floor(Math.random() * this.#mockBrands.length)]
@@ -45,7 +45,7 @@ export class PhoneRepositoryMock {
     )
   }
 
-  async assertGetAllPhones() {
+  async assertGetAllPhones () {
     const { req, res } = createMocks({
       method: 'GET'
     })
@@ -58,7 +58,7 @@ export class PhoneRepositoryMock {
     )
   }
 
-  async assertGetAllPhoneGreaterThanOne() {
+  async assertGetAllPhoneGreaterThanOne () {
     const { req, res } = createMocks({
       method: 'GET'
     })
@@ -68,7 +68,7 @@ export class PhoneRepositoryMock {
     expect(res._getJSONData().data.length).toBeGreaterThan(0)
   }
 
-  async assertGetPhoneByNumber() {
+  async assertGetPhoneByNumber () {
     const { req, res } = createMocks({
       method: 'GET',
       query: {
@@ -89,9 +89,9 @@ export class PhoneRepositoryMock {
     )
   }
 
-  async assertRespondWithErrorForGetPhoneByNumber() {
+  async assertRespondWithErrorForGetPhoneByNumber () {
     const { req, res } = createMocks({
-      method: 'GET',
+      method: 'GET'
     })
 
     await handlePhone(req, res)
@@ -99,7 +99,7 @@ export class PhoneRepositoryMock {
     expect(res._getStatusCode()).toBe(400)
   }
 
-  async assertEditPhoneByNumber() {
+  async assertEditPhoneByNumber () {
     const mockPhone = {
       number: this.#defaultEditNumber,
       brand: this.#mockBrands[Math.floor(Math.random() * this.#mockBrands.length)]
@@ -129,7 +129,7 @@ export class PhoneRepositoryMock {
     )
   }
 
-  async assertRespondWithErrorForEditPhoneByNumber() {
+  async assertRespondWithErrorForEditPhoneByNumber () {
     const { req, res } = createMocks({
       method: 'PUT',
       query: {
@@ -145,7 +145,7 @@ export class PhoneRepositoryMock {
     expect(res._getStatusCode()).toBe(400)
   }
 
-  async assertDeletePhoneByNumber() {
+  async assertDeletePhoneByNumber () {
     const { req, res } = createMocks({
       method: 'DELETE',
       query: {
@@ -163,7 +163,7 @@ export class PhoneRepositoryMock {
     )
   }
 
-  async assertRespondWithErrorForDeletePhoneByNumber() {
+  async assertRespondWithErrorForDeletePhoneByNumber () {
     const { req, res } = createMocks({
       method: 'DELETE',
       query: {
