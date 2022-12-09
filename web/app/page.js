@@ -1,14 +1,15 @@
-import Layout from 'components/layout'
+'use client'
+
 import Link from 'next/link'
 import { signOut, signIn } from 'next-auth/react'
 import { withSession } from 'hoc/withSession'
 
 function Home ({ session }) {
   return (
-    <Layout>
+    <>
       <nav>
         <Link href="/about">
-          <a>About</a>
+          About
         </Link>
       </nav>
 
@@ -30,7 +31,7 @@ function Home ({ session }) {
             <button onClick={() => signIn()}>Sign in with Credentials</button>
           </>
         )}
-    </Layout>
+    </>
   )
 }
 
