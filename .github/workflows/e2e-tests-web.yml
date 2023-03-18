@@ -2,9 +2,9 @@ name: E2E tests web
 
 on:
   pull_request:
-    branches: [ main ]
     paths:
-      - 'web/**/*.{js,jsx,ts,tsx}'
+      - web/**/*.{js,jsx,ts,tsx}
+      - .github/workflows/e2e-tests-web.yml
   workflow_dispatch:
   schedule:
     - cron: '0 20 * * *'

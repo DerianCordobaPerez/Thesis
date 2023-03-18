@@ -3,7 +3,8 @@ name: Unit tests web
 on:
   pull_request:
     paths:
-      - 'web/**/*.{js,jsx,ts,tsx}'
+      - web/**/*.{js,jsx,ts,tsx}
+      - .github/workflows/unit-tests-web.yml
   workflow_dispatch:
   schedule:
     - cron: '0 20 * * *'
