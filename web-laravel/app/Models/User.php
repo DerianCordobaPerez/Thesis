@@ -4,10 +4,19 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
+/**
+ * @property int $id
+ * @property string $name
+ * @property string $last_name
+ * @property int $age
+ * @property string $email
+ * @property string $birth_date
+ */
 final class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
@@ -45,4 +54,11 @@ final class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    public function addresses(): BelongsToMany
+    {
+        return $this->belongsToMany(
+            related: Address::class,
+        );
+    }
 }
