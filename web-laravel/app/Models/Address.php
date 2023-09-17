@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Thesis\Enums\ZipCode;
 
 /**
  * @property int $id
@@ -20,6 +21,10 @@ final class Address extends Model
         'city',
         'country',
         'zip_code',
+    ];
+
+    protected $casts = [
+        'zip_code' => ZipCode::class,
     ];
 
     public function users(): BelongsToMany

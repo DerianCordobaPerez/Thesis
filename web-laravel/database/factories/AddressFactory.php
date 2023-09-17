@@ -3,11 +3,12 @@
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Thesis\Enums\ZipCode;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Address>
  */
-class AddressFactory extends Factory
+final class AddressFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -17,7 +18,9 @@ class AddressFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'city' => $this->faker->city,
+            'country' => $this->faker->country,
+            'zip_code' => collect(ZipCode::cases())->random(),
         ];
     }
 }

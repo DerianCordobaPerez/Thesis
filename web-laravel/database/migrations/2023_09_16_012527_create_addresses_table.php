@@ -16,7 +16,10 @@ return new class extends Migration
             $table->id();
             $table->string('city');
             $table->string('country');
-            $table->integer('zip_code')->default(ZipCode::DEFAULT->value);
+            $table->integer('zip_code')
+                ->unsigned()
+                ->unique()
+                ->index(ZipCode::class);
             $table->timestamps();
         });
     }
